@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useRef,useEffect} from 'react'
 import styles from './Blogs.module.css'
 import BlogCard from '../BlogCard/BlogCard'
 import AddBlog from '../AddBlog/AddBlog'
@@ -13,13 +13,16 @@ const Blogs = () => {
  const [isPopupOpen,setIsPopupOpen] = useState(false)
  const [blogs,setBlogs] = useState([])
  const [readBlog,setReadBlog] = useState(false)
+ const messageEndRef = useRef(null)
+
+ useEffect(() => {
+    messageEndRef?.current?.scrollIntoView({ behavior: "smooth" });
+  }, [blogs])
+
   return (
 
- 
-
-
     <>
-    {!readBlog ? <ReadBlog/> :
+    {readBlog ? <ReadBlog/> :
     <>
     <div className={styles.popup__container}>
     {  isPopupOpen &&   <AddBlog setIsPopupOpen={setIsPopupOpen}/>    }
@@ -36,6 +39,13 @@ const Blogs = () => {
         !blogs.length ?
       <div className={styles.blogs__container}>
          <BlogCard/>
+         <BlogCard/>
+         <BlogCard/>
+         <BlogCard/>
+         <BlogCard/>
+         <BlogCard/>
+         <BlogCard/>
+         <div ref={messageEndRef}></div>
       </div>
  : <div className={styles.popup__noblogs}>
    <div className={styles.popup__main_icon}>   <PencilRuler /></div>
