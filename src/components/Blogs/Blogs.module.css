@@ -1,93 +1,89 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 .blogs {
-     padding: var(--margin-medium-large);
-     background: var(--color-accent);
-     width: 75%;
-     height: 100vh;
-        display: flex;
-        flex-direction: column;
-        gap: var(--margin-small);
-
+  padding: var(--margin-medium-large);
+  background: var(--color-accent);
+  width: 75%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: var(--margin-small);
 }
 
 .blogs__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .blogs__header .blogs__header_btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--margin-small-s);
-    border-radius: 0.4rem;
-    font-family: "Montserrat", sans-serif;
-    outline: none; 
-    border: none;
-    height: 2rem;
-    width: 12rem;
-    color: #fff;
-    background-color: var(--color-accent-btn);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--margin-small-s);
+  border-radius: 0.4rem;
+  font-family: "Montserrat", sans-serif;
+  outline: none;
+  border: none;
+  height: 2rem;
+  width: 12rem;
+  color: #fff;
+  background-color: var(--color-accent-btn);
 }
 
 .blogs__header .blogs__header_btn:hover {
-    scale: 1.04;
+  scale: 1.04;
 }
 
 .popup__container {
-    position: fixed;
+  position: fixed;
   top: 15%;
   left: 23%;
   z-index: 1;
 }
 .popup__noblogs {
-    height: 100vh;
-    display: flex;
-    gap: 0.5rem;
-    flex-direction: column;
-    align-items: center;
-   justify-content: center;
+  height: 100vh;
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .popup__noblogs button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    font-family: "Montserrat", sans-serif;
-    outline: none;
-    border: none;
-    font-weight: 500;
-    font-size: var(--font-medium);
-    height: 3.5rem;
-    width: 20rem;
-    color: #fff;
-   background: #59ACF3;
-   border-radius: 1rem;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: "Montserrat", sans-serif;
+  outline: none;
+  border: none;
+  font-weight: 500;
+  font-size: var(--font-medium);
+  height: 3.5rem;
+  width: 20rem;
+  color: #fff;
+  background: #59acf3;
+  border-radius: 1rem;
 }
 
 .popup__main_icon * {
-    width: 15rem;
-    height: 15rem;
-
+  width: 15rem;
+  height: 15rem;
 }
 
 .popup__noblogs button:hover {
-    scale: 1.02;
-    cursor: pointer;
+  scale: 1.02;
+  cursor: pointer;
 }
 
 select {
-    font-family: "Montserrat", sans-serif;
-    font-size: var(--font-small);
-    border: none;
-    outline: none;
-    border-radius: 0.4rem;
-    padding: 0.5rem;
-    background: var(--color-accent-keyword);
-    color:#6941C6;
-    width: 20%;
+  font-family: "Montserrat", sans-serif;
+  font-size: var(--font-small);
+  border: none;
+  outline: none;
+  border-radius: 0.4rem;
+  padding: 0.5rem;
+  background: var(--color-accent-keyword);
+  color: #6941c6;
+  width: 20%;
 }
