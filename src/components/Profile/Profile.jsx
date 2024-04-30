@@ -1,7 +1,8 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import styles from "./Profile.module.css";
 import toast, { Toaster } from 'react-hot-toast';
 import ToastMessage from "../../utils/toastMessage";
+import { getblogs } from "../../apis/blogs";
 
 import ProfilePhoto from "/assets/images/profile_pic.png";
 import dashboardIcon from "/assets/icons/dashboard.png"; 
@@ -14,7 +15,6 @@ import exitIcon from '/assets/icons/exit.png'
 
 const Profile = () => {
     const [isSelected,setIsSelected] = useState(3)
-    
     const [navigationData] = useState([
         {
             id: 1,
@@ -29,7 +29,7 @@ const Profile = () => {
         {
             id: 3,
             icon: documentIcon,
-            title: "Your Posts",
+            title: "Your Feeds",
         },
         {
             id: 4,
@@ -42,6 +42,7 @@ const Profile = () => {
             title: "Profile",
         }
     ]);
+
 
   return (
     <div className={styles.profile}>

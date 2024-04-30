@@ -30,3 +30,13 @@ export const deleteBlog = async(id) => {
             console.log(error)
            }
 }
+
+export const editBlogById = async({id,blogTitle,blogDescription,keywords}) => {
+             try {
+              const reqUrl = `${BACKENDURI}/edit-blog/${id}`
+            const response = await axios.patch(reqUrl,{blogTitle,blogDescription,keywords})
+            return response
+             } catch (error) {
+              console.log(error)
+             }
+}

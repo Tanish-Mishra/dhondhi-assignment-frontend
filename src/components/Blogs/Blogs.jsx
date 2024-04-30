@@ -10,26 +10,51 @@ import Pencil from "/assets/icons/pencil.png";
 import PencilWhite from "/assets/icons/pencil_white.png";
 import { PencilRuler } from "lucide-react";
 
-const Blogs = () => {
+const Blogs = (props) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [blogs, setBlogs] = useState([]);
-  const [readBlog, setReadBlog] = useState(false);
+  const [isReadBlog, setIsReadBlog] = useState(false);
   const messageEndRef = useRef(null);
+  const [readBlogData, setReadBlogData] = useState({});
+
 
   useEffect(() => {
     messageEndRef?.current?.scrollIntoView({ behavior: "smooth" });
   }, [blogs]);
 
+
   const deleteBlogById = async (id) => {
     const response = await deleteBlog(id);
     return response;
-}
+  };
 
   const getAllBlogs = async () => {
     const response = await getblogs();
     setBlogs(response?.data.blogs);
     return response;
   };
+  
+  const [editBlogData,setEditBlogData] = useState({
+    id:"",
+    edit: false,
+    blogTitle:"",
+    blogDescription:"",
+    keywords:""
+  })
+
+
+  const editBlog = (blog) => {
+    setEditBlogData({
+      id: blog._id,
+      edit: true,
+      blogTitle: blog.blogTitle,
+      blogDescription: blog.blogDescription,
+      keywords: blog.keywords
+    })
+    setIsPopupOpen(true)
+  }
+
+
 
   useEffect(() => {
     getAllBlogs();
@@ -37,12 +62,21 @@ const Blogs = () => {
 
   return (
     <>
-      {readBlog ? (
-        <ReadBlog />
+      {isReadBlog ? (
+        <ReadBlog getAllBlogs={getAllBlogs} readBlogData={readBlogData} setIsReadBlog={setIsReadBlog} />
       ) : (
         <>
           <div className={styles.popup__container}>
-            {isPopupOpen && <AddBlog setIsPopupOpen={setIsPopupOpen} />}
+            {isPopupOpen && (
+                <div className={styles.overlay}>
+              <AddBlog
+                setIsPopupOpen={setIsPopupOpen}
+                getAllBlogs={getAllBlogs}
+                editBlogData={editBlogData}
+                setEditBlogData={setEditBlogData}
+              />
+              </div>
+            )}
           </div>
           <div className={styles.blogs}>
             <div className={styles.blogs__header}>
@@ -65,8 +99,17 @@ const Blogs = () => {
             {blogs?.length ? (
               <div className={styles.blogs__container}>
                 {blogs?.map((blog, index) => (
-                    <div key={blog.id}>
-                  <BlogCard blog={blog} deleteBlogById={deleteBlogById} getAllBlogs={getAllBlogs}  />
+                  <div key={blog.id}>
+                    <BlogCard
+                      blog={blog}
+                      deleteBlogById={deleteBlogById}
+                      getAllBlogs={getAllBlogs}
+                      setIsPopupOpen={setIsPopupOpen}
+                      editBlog={editBlog}
+                      setIsReadBlog={setIsReadBlog}
+                      setReadBlogData={setReadBlogData}
+
+                    />
                   </div>
                 ))}
                 <div ref={messageEndRef}></div>
@@ -77,7 +120,12 @@ const Blogs = () => {
                   {" "}
                   <PencilRuler />
                 </div>
-                <button>
+                <button
+                  onClick={() => {
+                    setIsPopupOpen(true);
+                    console.log(isPopupOpen);
+                  }}
+                >
                   <img src={PencilWhite} alt="Pencil White" />
                   Start Writing
                 </button>
