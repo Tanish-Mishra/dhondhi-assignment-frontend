@@ -13,7 +13,7 @@ const AddBlog = ({
   setEditBlogData,
   setIsReadBlog,
 }) => {
-    const [isLoader, setIsLoader] = useState(false);
+ const [isLoader, setIsLoader] = useState(false);
   const [blogData, setBlogData] = useState({
     blogTitle: "" || editBlogData.blogTitle,
     blogDescription: "" || editBlogData.blogDescription,
@@ -102,10 +102,15 @@ const AddBlog = ({
                 ToastMessage("Blog Added Successfully", 0);
                 setIsPopupOpen(false);
                 getAllBlogs();
+            setIsLoader(false);
+
               } else {
                 ToastMessage("Failed to add blog", 1);
+            setIsLoader(false);
+
               }
             } else {
+                setIsLoader(true);
               const response = await editBlogById({
                 ...blogData,
                 id: editBlogData.id,
@@ -118,10 +123,13 @@ const AddBlog = ({
                 keywords: "",
               });
               if (response?.status === 200) {
+             if(setIsReadBlog){
                 setIsReadBlog(false);
+             }
                 ToastMessage("Blog Edited Successfully", 0);
                 setIsPopupOpen(false);
                 getAllBlogs();
+                setIsLoader(false);
               }
             }
           }}
