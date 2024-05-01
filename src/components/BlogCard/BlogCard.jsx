@@ -3,12 +3,16 @@ import styles from "./BlogCard.module.css";
 import ToastMessage from "../../utils/toastMessage";
 import MiniProfilePic from "/assets/images/mini_profile.png";
 import toast, { Toaster } from "react-hot-toast";
+import LoadingSpin from "react-loading-spin";
+
 
 import { Trash2 } from "lucide-react";
 import { Pencil } from "lucide-react";
 
 const BlogCard = (props) => {
   const [formattedDate, setFormattedDate] = useState();
+  const [isLoader, setIsLoader] = useState(false);
+
   useEffect(() => {
     const createdAtDate = new Date(props?.blog?.createdAt);
 
@@ -22,6 +26,7 @@ const BlogCard = (props) => {
   }, []);
   return (
     <div className={styles.blogcard}>
+        {isLoader && <div className={styles.overlay}><LoadingSpin primaryColor="#000"/> </div> }
       <Toaster position="top-right" reverseOrder={false} />
       <div className={styles.blogcard__header}>
         <h4>{props?.blog?.blogTitle}</h4>
@@ -40,12 +45,17 @@ const BlogCard = (props) => {
           </button>
           <button
             onClick={async () => {
+                setIsLoader(true);
               const response = await props.deleteBlogById(props?.blog._id);
               if (response?.status === 200) {
                 await props.getAllBlogs();
                 ToastMessage("Blog Deleted Successfully", 0);
+                setIsLoader(false);
+
               } else {
                 ToastMessage("Failed to delete blog", 1);
+                setIsLoader(false);
+
               }
             }}
           >

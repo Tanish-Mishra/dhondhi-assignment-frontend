@@ -4,6 +4,8 @@ import toast, { Toaster } from "react-hot-toast";
 import ToastMessage from "../../utils/toastMessage";
 import { deleteBlog } from "../../apis/blogs";
 import AddBlog from "../AddBlog/AddBlog";
+import LoadingSpin from "react-loading-spin";
+
 
 import MiniProfilePic from "/assets/images/mini_profile.png";
 import { Trash2 } from "lucide-react";
@@ -13,6 +15,7 @@ import { LogOut } from "lucide-react";
 const ReadBlog = (props) => {
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
   const [isAddBlog, setIsAddBlog] = useState(false);
+
   const [formattedDate, setFormattedDate] = useState(
     props?.readBlogData?.createdAt
   );
@@ -34,6 +37,7 @@ const ReadBlog = (props) => {
   }, []);
   return (
     <div className={styles.blog}>
+   
       <Toaster position="top-right" reverseOrder={false} />
       {isConfirmationOpen && (
         <div className={styles.overlay}>
@@ -103,12 +107,17 @@ const ConfirmationPopup = ({
   setIsReadingBlog,
   getAllBlogs,
 }) => {
+
+  const [isLoader, setIsLoader] = useState(false);
+
   const deleteBlogById = async (id) => {
     const response = await deleteBlog(id);
     return response;
   };
   return (
     <div className={styles.confirmation_popup}>
+        {isLoader && <div className={styles.overlay}><LoadingSpin primaryColor="#000"/> </div> }
+
       <h2>Sure you want to delete?</h2>
       <span>Are you sure you want to delete this?</span>
       <div className={styles.confirmation_popup_btn_container}>
@@ -121,13 +130,16 @@ const ConfirmationPopup = ({
         </button>
         <button
           onClick={async () => {
+            setIsLoader(true);
             const response = await deleteBlogById(blogId);
             if (response?.status === 200) {
+                setIsLoader(false);
               ToastMessage("Blog Deleted Successfully", 0);
               setIsConfirmationOpen(false);
               setIsReadingBlog(false);
               getAllBlogs();
             } else {
+                setIsLoader(false);
               ToastMessage("Failed to delete blog", 1);
             }
           }}
