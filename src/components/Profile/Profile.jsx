@@ -51,7 +51,6 @@ const Profile = (props) => {
   return (
 
     <div
-     
       className={styles.profile}
       style={{
         display: props.isProfileActive || screenSize > 430 ? "flex" : "none",

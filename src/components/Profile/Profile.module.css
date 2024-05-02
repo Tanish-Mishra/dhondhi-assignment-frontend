@@ -88,7 +88,7 @@ h2 {
         width: 70%;
         z-index: 1;
         display: none;
-    box-shadow: 0 0px 0px 1000px #00000099;
+        box-shadow: 0 0px 0px 100vh #00000099;
     }
     h2 {
       font-size: var(--font-medium-s);
