@@ -9,6 +9,9 @@ import { deleteBlog } from "../../apis/blogs";
 import Pencil from "/assets/icons/pencil.png";
 import PencilWhite from "/assets/icons/pencil_white.png";
 import { PencilRuler } from "lucide-react";
+import { ArrowRightFromLine } from 'lucide-react';
+import { ArrowLeftFromLine } from 'lucide-react';
+
 
 const Blogs = (props) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -27,6 +30,12 @@ const Blogs = (props) => {
     const response = await deleteBlog(id);
     return response;
   };
+
+  const setPageHandler = (selectedPage) => {
+    if(selectedPage>=1 && selectedPage!==page && selectedPage && selectedPage <= (parseInt(blogs.length/4)) ) {
+    setPage(selectedPage) 
+}
+  }
 
   const getAllBlogs = async () => {
     const response = await getblogs();
@@ -102,7 +111,7 @@ const Blogs = (props) => {
             </div>
             {blogs?.length ? (
               <div className={styles.blogs__container}>
-                {blogs?.map((blog, index) => (
+                {blogs?.slice(page * 4 - 4,page * 4).map((blog, index) => (
                   <div key={blog.id}>
                     <BlogCard
                       blog={blog}
@@ -117,16 +126,24 @@ const Blogs = (props) => {
                   </div>
                 ))}
                 <div>
-                    {blogs.length > 0 && <div>
+                    {blogs.length > 0 && <div className={styles.pagination__container}>
 
-                   <span>
-                    ⬇️
+                   <span onClick={()=>{
+                    setPageHandler(page-1)
+                   }}>
+                   <ArrowLeftFromLine />
                    </span>
-                    {/* {[...Array(blogs.length / 3).map((_,i)=>(
-                          <span>{i+1}</span>
-                    ))]} */}
-                   <span>
-                    ⬆️
+                    {[...Array(parseInt(blogs.length / 4))].map((_,i)=>(
+                          <span style={{
+                            border: page === (i + 1) ? "2px solid red" : "2px solid  #181717",
+                          }} onClick={()=>{
+                          setPageHandler(i+1)
+                          }}>{i+1}</span>
+                    ))}
+                   <span onClick={()=>{
+                    setPageHandler(page+1)
+                   }}>
+                   <ArrowRightFromLine />
                    </span>
                         </div>}
                 </div>
@@ -144,7 +161,7 @@ const Blogs = (props) => {
                   }}
                 >
                   <img src={PencilWhite} alt="Pencil White" />
-                  Start Writing
+                     Start Writing
                 </button>
               </div>
             )}

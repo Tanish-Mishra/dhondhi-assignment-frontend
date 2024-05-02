@@ -107,3 +107,26 @@ select {
     align-items: center;
     justify-content: center;
 }
+
+.pagination__container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+}
+
+.pagination__container span {
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2rem;
+    width: 2rem;
+    /* border: 2px solid var(--color-accent-btn); */
+    border-radius: 1rem;
+}
+
+.pagination__container span:hover {
+    scale: 1.1;
+}
