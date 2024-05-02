@@ -32,7 +32,7 @@ Start the server
 
 ## Environment Variables
 
-To run this project, you will need to add the following environment variables to your .env file
+To run this project, you will need to add the following environment variables to your .env file in the root of the project and format of env is show in .env.sample file.
 
 `VITE_BACKEND_URI` - The URL of the backend API
 
