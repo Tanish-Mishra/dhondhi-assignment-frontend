@@ -69,9 +69,7 @@ const Blogs = (props) => {
     getAllBlogs();
   }, []);
 
-  useEffect(()=>{
-     console.log(blogs.length);
-  },[blogs])
+
 
   return (
     <>

@@ -37,7 +37,6 @@ const AddBlog = ({
     setBlogData(
         {...blogData, keywords:updatedKeywords}
     )
-
   }
 
 
