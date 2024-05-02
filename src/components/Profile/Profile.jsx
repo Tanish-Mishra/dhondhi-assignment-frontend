@@ -15,6 +15,7 @@ import exitIcon from '/assets/icons/exit.png'
 
 const Profile = () => {
     const [isSelected,setIsSelected] = useState(3)
+    const [screenSize,setScreenSize] = useState(window.innerWidth)
     const [navigationData] = useState([
         {
             id: 1,
@@ -43,6 +44,11 @@ const Profile = () => {
         }
     ]);
 
+    const checkScreenSize = () => {
+        setScreenSize(window.innerWidth)
+        console.log(screenSize)
+    }
+    window.addEventListener("resize",checkScreenSize)
 
   return (
     <div className={styles.profile}>
