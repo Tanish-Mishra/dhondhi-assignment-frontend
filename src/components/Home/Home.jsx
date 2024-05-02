@@ -1,13 +1,13 @@
-import React,{useRef} from 'react'
+import React,{useState} from 'react'
 import styles from './Home.module.css'
 import Profile from '../Profile/Profile'
 import Blogs from '../Blogs/Blogs'
 const Home = () => {
-    const homeRef = useRef(null)
+   const [isProfileActive,setIsProfileActive] = useState(false)
   return (
-    <div className={styles.home} ref={homeRef}>
-            <Profile homeRef={homeRef} />
-           <Blogs homeRef={homeRef}/>
+    <div className={styles.home}>
+            <Profile setIsProfileActive={setIsProfileActive} isProfileActive={isProfileActive} />
+           <Blogs  setIsProfileActive={setIsProfileActive} isProfileActive={isProfileActive}/>
     </div>
   )
 }

@@ -10,6 +10,8 @@
     background: #fff;
     border-radius: 0.5rem;
     padding: var(--margin-small);
+    overflow: scroll;
+    scrollbar-width: none;
 }
 
 .blogcard__header {

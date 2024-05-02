@@ -133,3 +133,11 @@
 .popup__addkeyword_btn:hover {
      scale: 1.1;
 }
+
+@media screen and (max-width: 430px) {
+  .popup {
+    width: 85vw;
+    height: 50vh;
+  }
+
+}

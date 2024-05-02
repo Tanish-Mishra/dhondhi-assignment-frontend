@@ -8,6 +8,7 @@ import { deleteBlog } from "../../apis/blogs";
 
 import Pencil from "/assets/icons/pencil.png";
 import PencilWhite from "/assets/icons/pencil_white.png";
+import Hamburger from "/assets/icons/topbar.png";
 import { PencilRuler } from "lucide-react";
 import { ArrowRightFromLine } from 'lucide-react';
 import { ArrowLeftFromLine } from 'lucide-react';
@@ -19,12 +20,12 @@ const Blogs = (props) => {
   const [isReadBlog, setIsReadBlog] = useState(false);
   const messageEndRef = useRef(null);
   const [readBlogData, setReadBlogData] = useState({});
+  const [screenSize,setScreenSize] = useState(window.innerWidth)
   const [page,setPage] = useState(1)
 
-  useEffect(() => {
-    messageEndRef?.current?.scrollIntoView({ behavior: "smooth" });
-  }, [blogs]);
 
+
+  
 
   const deleteBlogById = async (id) => {
     const response = await deleteBlog(id);
@@ -63,6 +64,16 @@ const Blogs = (props) => {
     setIsPopupOpen(true)
   }
 
+  const checkScreenSize = () => {
+    setScreenSize(window.innerWidth)
+  }
+
+  window.addEventListener("resize",checkScreenSize)
+
+  useEffect(() => {
+    messageEndRef?.current?.scrollIntoView({ behavior: "smooth" });
+  }, [blogs]);
+
 
 
   useEffect(() => {
@@ -91,7 +102,16 @@ const Blogs = (props) => {
           </div>
           <div className={styles.blogs}>
             <div className={styles.blogs__header}>
+              <div style={{
+                display: "flex",
+                gap: "10px",
+              }}>
+             {screenSize <=430  &&  <img src={Hamburger} alt="hamburger" onClick={()=>{
+                props.setIsProfileActive(true)
+             }} /> }
               <h2>{!blogs.length ? "Your Posts" : "Your Feeds"}</h2>
+
+              </div>
 
               {blogs?.length ? (
                 <button

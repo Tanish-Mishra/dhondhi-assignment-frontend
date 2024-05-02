@@ -9,6 +9,7 @@
     justify-content: space-between;
     align-items: center;
     background: #fff;
+    animation: hamburger 0.3s ease-in-out;
 } 
 .profile__information {
  display: flex;
@@ -77,8 +78,62 @@ h2 {
 
 }
 
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background: #000000A8;
+    z-index: 0;
+
+
+}
+
 
 
 @media screen and (max-width: 428px) {
+    .profile  {
+        position: fixed;
+        width: 70%;
+        z-index: 1;
+        display: none;
+    }
+    h2 {
+      font-size: var(--font-medium-s);
+        font-weight: 500;
+        font-family: "Montserrat";
     
+    }
+    .profile__information .profile__information_ig  {
+        font-family: "Montserrat", cursive;
+        font-style: italic;
+        align-self: center;
+        color: #000000A8;
+        font-size: var(--font-small-s);
+    }
+    .profile__navigation .profile__navigation_list  {
+
+        gap: 2rem;
+    
+    }
+    .profile__stats_number {
+        margin-right: -0.3rem;
+        align-self: center;
+       width: 5rem;
+    } 
+
+    
+  
+
+@keyframes hamburger {
+    from {
+       width: 0;
+    }
+    to {
+       width: 70%
+    }
+}
+
+
 }

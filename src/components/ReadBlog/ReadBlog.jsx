@@ -11,12 +11,15 @@ import MiniProfilePic from "/assets/images/mini_profile.png";
 import { Trash2 } from "lucide-react";
 import { Pencil } from "lucide-react";
 import { LogOut } from "lucide-react";
+import { ChevronLeft } from 'lucide-react';
+import More from "/assets/icons/dots.png";
 
 const ReadBlog = (props) => {
 
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
   const [isAddBlog, setIsAddBlog] = useState(false);
-
+  const [screenSize,setScreenSize] = useState(window.innerWidth)
+  const [isMobileToggle,setIsMobileToggle] = useState(false)
   const [formattedDate, setFormattedDate] = useState(
     props?.readBlogData?.createdAt
   );
@@ -25,6 +28,12 @@ const ReadBlog = (props) => {
     id: props.readBlogData._id,
     edit: true,
   });
+
+
+  const checkScreenSize = () => {
+    setScreenSize(window.innerWidth)
+}
+window.addEventListener("resize",checkScreenSize)
   useEffect(() => {
     const createdAtDate = new Date(props?.readBlogData?.createdAt);
 
@@ -62,18 +71,31 @@ const ReadBlog = (props) => {
       )}
 
       <div className={styles.blog__header}>
+        <div className={styles.blog__header_title_container} >
+   <ChevronLeft style={{
+    marginRight: "15px",
+    marginLeft: "-25px",
+   }}  onClick={()=>{
+      props.setIsReadBlog(false)
+   }}/>
         <h2>{props.readBlogData.blogTitle}</h2>
 
+        </div>
+
         <div className={styles.blog__header_btn}>
-          <button
+
+  {screenSize > 430 ?
+  <>          <button
             onClick={() => {
-              props.setIsReadBlog(false);
+              navigator.clipboard.writeText(window.location.href);
+              ToastMessage("Link Copied", 0);
             }}
           >
             <LogOut />
           </button>
           <button
             onClick={() => {
+
               setIsConfirmationOpen(true);
             }}
           >
@@ -86,6 +108,42 @@ const ReadBlog = (props) => {
           >
             <Pencil />
           </button>
+          </>
+          : 
+         <div className={styles.blog__more_btn_container}>
+      <img src={More} alt="More" onClick={()=>[
+        setIsMobileToggle(!isMobileToggle)
+      ]} />
+      {isMobileToggle &&
+      <div className={styles.blog__more_btn_inner_container}>
+           <button  onClick={() => {
+              navigator.clipboard.writeText(window.location.href);
+              ToastMessage("Link Copied", 0);
+            }}>
+            Share
+           </button>
+           <hr/>
+           <button onClick={() => {
+              setIsAddBlog(true);
+            }}>
+            Edit
+           </button>
+           <hr/>
+           <button  onClick={() => {
+
+setIsConfirmationOpen(true);
+}}>
+            Delete
+           </button>
+
+      </div> 
+
+}
+         </div>
+          
+ 
+}
+
         </div>
       </div>
 
@@ -94,6 +152,7 @@ const ReadBlog = (props) => {
           <img src={MiniProfilePic} alt="Profile" /> <span>James Anderson</span>
         </div>
         <div className={styles.blogcard__information_date}>{formattedDate}</div>
+        <div className={styles.blogcard__information_readtime}>4min.read</div>
       </div>
         <div className={styles.blogcard__keywords_container}>
 

@@ -130,3 +130,18 @@ select {
 .pagination__container span:hover {
     scale: 1.1;
 }
+
+
+@media screen and (max-width: 430px) {
+  .blogs {
+    width: 100%;
+  }
+  .blogs__header .blogs__header_btn {
+    width: 30%;
+  }
+
+  .blogs__header h2{
+     font-size: var(--font-medium-s);
+  }
+
+}

@@ -13,7 +13,7 @@ import settingsIcon from "/assets/icons/settings.png";
 import exitIcon from '/assets/icons/exit.png'
 
 
-const Profile = () => {
+const Profile = (props) => {
     const [isSelected,setIsSelected] = useState(3)
     const [screenSize,setScreenSize] = useState(window.innerWidth)
     const [navigationData] = useState([
@@ -46,12 +46,20 @@ const Profile = () => {
 
     const checkScreenSize = () => {
         setScreenSize(window.innerWidth)
-        console.log(screenSize)
     }
     window.addEventListener("resize",checkScreenSize)
+  
+
 
   return (
-    <div className={styles.profile}>
+    <>
+    <div className={styles.profile}
+  
+     style={{
+      display: props.isProfileActive || screenSize > 430 ? "flex" : "none",
+
+     }}
+    >
   <Toaster
   position="top-right"
   reverseOrder={false}
@@ -97,11 +105,21 @@ const Profile = () => {
           </ul>
              </div>
   <div className={styles.profile__logout} onClick={()=>{
+    if(!props.isProfileActive){
       ToastMessage("Under Development!",1)
-  }}><img src={exitIcon} alt="exit" /> <span>Log Out</span></div>
+    }
+  }}><img src={exitIcon} alt="exit" /> <span onClick={()=>{
+     props.setIsProfileActive(false)
+  }}>Log Out</span></div>
 
     </div>
+
+  <div className={styles.overlay}></div>
+
+</>
+
   );
+  
 };
 
 export default Profile;
