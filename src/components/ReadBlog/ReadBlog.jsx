@@ -98,7 +98,7 @@ const ReadBlog = (props) => {
         <div className={styles.blogcard__keywords_container}>
 
          { props.readBlogData?.keywords.map((keyword, index) =>(
-          <span>keyword</span>
+          <span>{keyword}</span>
          )) }
 
         </div>
