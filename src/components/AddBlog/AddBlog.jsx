@@ -27,7 +27,7 @@ const AddBlog = ({
       ...blogData,
       [e.target.name]: e.target.value,
     });
-    console.log(blogData)
+        
   };
   
   const handleKeywords = () => {
@@ -39,12 +39,11 @@ const AddBlog = ({
     )
   }
 
-
   const handlePublish = async() =>{
         if (
           !blogData.blogTitle ||
           !blogData.blogDescription ||
-          !blogData.keywords
+          !blogData.keywords.length
         ) {
           ToastMessage("Please fill all the fields", 1);
           return;
@@ -113,9 +112,13 @@ const AddBlog = ({
     
         <div className={styles.popup_keywords_container}>
             <span>Keywords</span>
+
+            
        {noOfKeywords.map((item,index) => (
           <input type="text"  name="keywords"  ref={keywordsData}  className={styles.popup__keyword_bar} placeholder="Keywords" />
        ) )}
+
+
        </div>
           <button className={styles.popup__addkeyword_btn} onClick={()=>{
                 setNoOfKeywords([...noOfKeywords,1])
