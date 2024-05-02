@@ -16,7 +16,7 @@ const Blogs = (props) => {
   const [isReadBlog, setIsReadBlog] = useState(false);
   const messageEndRef = useRef(null);
   const [readBlogData, setReadBlogData] = useState({});
-
+  const [page,setPage] = useState(1)
 
   useEffect(() => {
     messageEndRef?.current?.scrollIntoView({ behavior: "smooth" });
@@ -60,6 +60,10 @@ const Blogs = (props) => {
     getAllBlogs();
   }, []);
 
+  useEffect(()=>{
+     console.log(blogs.length);
+  },[blogs])
+
   return (
     <>
       {isReadBlog ? (
@@ -98,7 +102,7 @@ const Blogs = (props) => {
             </div>
             {blogs?.length ? (
               <div className={styles.blogs__container}>
-                {blogs?.slice(0,2).map((blog, index) => (
+                {blogs?.map((blog, index) => (
                   <div key={blog.id}>
                     <BlogCard
                       blog={blog}
@@ -112,6 +116,20 @@ const Blogs = (props) => {
                     />
                   </div>
                 ))}
+                <div>
+                    {blogs.length > 0 && <div>
+
+                   <span>
+                    ⬇️
+                   </span>
+                    {/* {[...Array(blogs.length / 3).map((_,i)=>(
+                          <span>{i+1}</span>
+                    ))]} */}
+                   <span>
+                    ⬆️
+                   </span>
+                        </div>}
+                </div>
                 <div ref={messageEndRef}></div>
               </div>
             ) : (
@@ -123,7 +141,6 @@ const Blogs = (props) => {
                 <button
                   onClick={() => {
                     setIsPopupOpen(true);
-                    console.log(isPopupOpen);
                   }}
                 >
                   <img src={PencilWhite} alt="Pencil White" />

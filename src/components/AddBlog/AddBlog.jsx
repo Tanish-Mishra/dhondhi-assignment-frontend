@@ -37,7 +37,6 @@ const AddBlog = ({
     setBlogData(
         {...blogData, keywords:updatedKeywords}
     )
-    console.log(blogData)
 
   }
 
@@ -46,14 +45,14 @@ const AddBlog = ({
         if (
           !blogData.blogTitle ||
           !blogData.blogDescription ||
-          !blogData.keywords.length
+          !blogData.keywords
         ) {
           ToastMessage("Please fill all the fields", 1);
           return;
         }
         setIsLoader(true);
         if (!editBlogData.edit) {
-            handleKeywords()
+
          const response = await addBlogData();
           if (response?.status === 201) {
             ToastMessage("Blog Added Successfully", 0);
@@ -152,7 +151,7 @@ const AddBlog = ({
           Cancel
         </button>
         <button
-         onClick={handlePublish}
+         onClick={handlePublish}   
         >
           Publish
         </button>
