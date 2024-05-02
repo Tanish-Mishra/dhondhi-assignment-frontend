@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useRef } from "react";
 import styles from "./AddBlog.module.css";
 import toast, { Toaster } from "react-hot-toast";
 import ToastMessage from "../../utils/toastMessage";
@@ -14,10 +14,12 @@ const AddBlog = ({
   setIsReadBlog,
 }) => {
  const [isLoader, setIsLoader] = useState(false);
+ const [noOfKeywords, setNoOfKeywords] = useState([]);
+  const keywordsData = useRef(null)
   const [blogData, setBlogData] = useState({
     blogTitle: "" || editBlogData.blogTitle,
     blogDescription: "" || editBlogData.blogDescription,
-    keywords: "" || editBlogData.keywords,
+    keywords: [] || editBlogData.keywords,
   });
  
   const handleChange = (e) => {
@@ -25,10 +27,22 @@ const AddBlog = ({
       ...blogData,
       [e.target.name]: e.target.value,
     });
+    console.log(blogData)
   };
+  
+  const handleKeywords = () => {
+    const keyword = keywordsData.current.value;
+    const blogKeywords = blogData.keywords;
+    const updatedKeywords = [...blogKeywords, keyword];
+    setBlogData(
+        {...blogData, keywords:updatedKeywords}
+    )
+    console.log(blogData)
+
+  }
+
 
   const handlePublish = async() =>{
-
         if (
           !blogData.blogTitle ||
           !blogData.blogDescription ||
@@ -39,7 +53,8 @@ const AddBlog = ({
         }
         setIsLoader(true);
         if (!editBlogData.edit) {
-          const response = await addBlogData();
+            handleKeywords()
+         const response = await addBlogData();
           if (response?.status === 201) {
             ToastMessage("Blog Added Successfully", 0);
             setIsPopupOpen(false);
@@ -97,18 +112,17 @@ const AddBlog = ({
           name="blogTitle"
           placeholder="Write Title"
         />
-        <select
-          name="keywords"
-          onChange={(e) => {
-            handleChange(e);
-          }}
-          value={blogData.keywords}
-          className={styles.popup__select_keyword}
-        >
-          <option disabled>Keyword</option>
-          <option value="Leadership">Leadership</option>
-          <option value="Management">Management</option>
-        </select>
+    
+        <div className={styles.popup_keywords_container}>
+            <span>Keywords</span>
+       {noOfKeywords.map((item,index) => (
+          <input type="text"  name="keywords"  ref={keywordsData}  className={styles.popup__keyword_bar} placeholder="Keywords" />
+       ) )}
+       </div>
+          <button onClick={()=>{
+                setNoOfKeywords([...noOfKeywords,1])
+                handleKeywords()
+          }}>ADD</button>
       </div>
 
       <textarea

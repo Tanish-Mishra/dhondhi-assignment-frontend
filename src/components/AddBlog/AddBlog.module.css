@@ -66,6 +66,40 @@
   scale: 1.1;
 }
 
+.popup_keywords_container {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+   overflow: scroll;
+   scrollbar-width: none;
+}
+
+.popup_keywords_container span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    border:none;
+    outline: none;
+  height: 2rem;
+  width: 5rem;
+ border-radius: 0.4rem;
+  background: var(--color-accent-keyword);
+ color:  #6941C6;
+}
+
+.popup__keyword_bar {
+    padding: 0 0 0 0.2rem;
+    font-size: 0.8rem;
+    border:none;
+    outline: none;
+  height: 2rem;
+  width: 5rem;
+ border-radius: 0.2rem;
+  background: var(--color-accent-keyword);
+ color:  #6941C6;
+
+}
 
 .overlay {
     position: fixed;
@@ -78,3 +112,4 @@
     align-items: center;
     justify-content: center;
 }
+

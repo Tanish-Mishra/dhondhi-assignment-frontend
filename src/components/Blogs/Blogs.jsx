@@ -98,7 +98,7 @@ const Blogs = (props) => {
             </div>
             {blogs?.length ? (
               <div className={styles.blogs__container}>
-                {blogs?.map((blog, index) => (
+                {blogs?.slice(0,2).map((blog, index) => (
                   <div key={blog.id}>
                     <BlogCard
                       blog={blog}

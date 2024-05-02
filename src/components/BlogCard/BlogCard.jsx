@@ -89,7 +89,6 @@ const BlogCard = (props) => {
         <div className={styles.blogcard__footer_keywords_container}>
           {props?.blog?.keywords.map((item) => (
             <span key={item}>{item}</span>
-            // <span>Management</span>
           ))}
         </div>
 
