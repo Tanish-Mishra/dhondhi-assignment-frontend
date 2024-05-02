@@ -8,6 +8,7 @@
   gap: var(--margin-medium-sm);
   box-shadow: 0px 39.47px 39.47px 0px #00000014;
   background: #fff;
+  z-index: 999;
 }
 
 .popup__header_container {
