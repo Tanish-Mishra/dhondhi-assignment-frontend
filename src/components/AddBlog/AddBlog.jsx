@@ -27,6 +27,56 @@ const AddBlog = ({
     });
   };
 
+  const handlePublish = async() =>{
+
+        if (
+          !blogData.blogTitle ||
+          !blogData.blogDescription ||
+          !blogData.keywords.length
+        ) {
+          ToastMessage("Please fill all the fields", 1);
+          return;
+        }
+        setIsLoader(true);
+        if (!editBlogData.edit) {
+          const response = await addBlogData();
+          if (response?.status === 201) {
+            ToastMessage("Blog Added Successfully", 0);
+            setIsPopupOpen(false);
+            getAllBlogs();
+        setIsLoader(false);
+
+          } else {
+            ToastMessage("Failed to add blog", 1);
+        setIsLoader(false);
+
+          }
+        } else {
+            setIsLoader(true);
+          const response = await editBlogById({
+            ...blogData,
+            id: editBlogData.id,
+          });
+          setEditBlogData({
+            id: "",
+            edit: false,
+            blogTitle: "",
+            blogDescription: "",
+            keywords: "",
+          });
+          if (response?.status === 200) {
+         if(setIsReadBlog){
+            setIsReadBlog(false);
+         }
+            ToastMessage("Blog Edited Successfully", 0);
+            setIsPopupOpen(false);
+            getAllBlogs();
+            setIsLoader(false);
+          }
+        }
+
+  }
+
   const addBlogData = async () => {
     const response = await addBlog({ ...blogData });
     return response;
@@ -64,9 +114,11 @@ const AddBlog = ({
       <textarea
         name="blogDescription"
         value={blogData.blogDescription}
+         
         onChange={(e) => {
           handleChange(e);
         }}
+         
         className={styles.popup__content}
         placeholder="Start Typing..."
       ></textarea>
@@ -86,53 +138,7 @@ const AddBlog = ({
           Cancel
         </button>
         <button
-          onClick={async () => {
-            if (
-              !blogData.blogTitle ||
-              !blogData.blogDescription ||
-              !blogData.keywords.length
-            ) {
-              ToastMessage("Please fill all the fields", 1);
-              return;
-            }
-            setIsLoader(true);
-            if (!editBlogData.edit) {
-              const response = await addBlogData();
-              if (response?.status === 201) {
-                ToastMessage("Blog Added Successfully", 0);
-                setIsPopupOpen(false);
-                getAllBlogs();
-            setIsLoader(false);
-
-              } else {
-                ToastMessage("Failed to add blog", 1);
-            setIsLoader(false);
-
-              }
-            } else {
-                setIsLoader(true);
-              const response = await editBlogById({
-                ...blogData,
-                id: editBlogData.id,
-              });
-              setEditBlogData({
-                id: "",
-                edit: false,
-                blogTitle: "",
-                blogDescription: "",
-                keywords: "",
-              });
-              if (response?.status === 200) {
-             if(setIsReadBlog){
-                setIsReadBlog(false);
-             }
-                ToastMessage("Blog Edited Successfully", 0);
-                setIsPopupOpen(false);
-                getAllBlogs();
-                setIsLoader(false);
-              }
-            }
-          }}
+         onClick={handlePublish}
         >
           Publish
         </button>
