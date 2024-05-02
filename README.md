@@ -2,7 +2,7 @@
 
 A simple blogging platform where users can create, read, update, and delete blog posts.
 
-[Live-Webapp](https://dhondhi-assignment-frontend.vercel.app/)
+[Live-Webapp](https://dhondhi-assignment.vercel.app/)
 
 ## Run Locally
 
