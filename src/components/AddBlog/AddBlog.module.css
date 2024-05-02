@@ -113,3 +113,23 @@
     justify-content: center;
 }
 
+
+
+.popup__addkeyword_btn {
+    cursor:pointer;
+   padding: 0.5rem 2rem;
+    align-self: flex-start;
+   border: 1px solid var(--color-accent-btn);
+    outline: none;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    color: #000000;
+    background: transparent;
+
+     
+
+}
+
+.popup__addkeyword_btn:hover {
+     scale: 1.1;
+}

@@ -119,10 +119,10 @@ const AddBlog = ({
           <input type="text"  name="keywords"  ref={keywordsData}  className={styles.popup__keyword_bar} placeholder="Keywords" />
        ) )}
        </div>
-          <button onClick={()=>{
+          <button className={styles.popup__addkeyword_btn} onClick={()=>{
                 setNoOfKeywords([...noOfKeywords,1])
                 handleKeywords()
-          }}>ADD</button>
+          }}>Add</button>
       </div>
 
       <textarea
