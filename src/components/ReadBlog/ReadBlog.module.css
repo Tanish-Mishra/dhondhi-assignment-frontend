@@ -110,7 +110,23 @@
   scale: 1.05;
 }
 
+.blogcard__keywords_container {
+  display: flex;
+  gap: 0.5rem;
 
+}
+
+.blogcard__keywords_container span {
+  background: var(--color-accent-keyword);
+font-size: var(--font-small);
+padding: 0.2rem;
+color:#6941C6;
+border-radius: 0.3rem;
+}
+.blogcard__keywords_container span:nth-child(2) {
+  background: var(--color-accent-keyword-2);
+  color: #363F72;
+}
 .overlay {
     position: fixed;
     top: 0;

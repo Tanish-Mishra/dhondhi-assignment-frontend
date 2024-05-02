@@ -13,6 +13,7 @@ import { Pencil } from "lucide-react";
 import { LogOut } from "lucide-react";
 
 const ReadBlog = (props) => {
+
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
   const [isAddBlog, setIsAddBlog] = useState(false);
 
@@ -32,7 +33,6 @@ const ReadBlog = (props) => {
       month: "short",
       day: "2-digit",
     });
-
     setFormattedDate(formattedDateStr);
   }, []);
   return (
@@ -95,7 +95,13 @@ const ReadBlog = (props) => {
         </div>
         <div className={styles.blogcard__information_date}>{formattedDate}</div>
       </div>
+        <div className={styles.blogcard__keywords_container}>
 
+         { props.readBlogData?.keywords.map((keyword, index) =>(
+          <span>keyword</span>
+         )) }
+
+        </div>
       <p>{props.readBlogData.blogDescription}</p>
     </div>
   );
