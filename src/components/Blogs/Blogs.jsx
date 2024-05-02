@@ -32,7 +32,7 @@ const Blogs = (props) => {
   };
 
   const setPageHandler = (selectedPage) => {
-    if(selectedPage>=1 && selectedPage!==page && selectedPage && selectedPage <= (parseInt(blogs.length/4)) ) {
+    if(selectedPage>=1 && selectedPage!==page && selectedPage && selectedPage <= (Math.ceil(blogs.length/4)) ) {
     setPage(selectedPage) 
 }
   }
@@ -131,7 +131,7 @@ const Blogs = (props) => {
                    }}>
                    <ArrowLeftFromLine />
                    </span>
-                    {[...Array(parseInt(blogs.length / 4))].map((_,i)=>(
+                    {[...Array(Math.ceil(blogs.length / 4))].map((_,i)=>(
                           <span style={{
                             border: page === (i + 1) ? "2px solid red" : "2px solid  #181717",
                           }} onClick={()=>{
