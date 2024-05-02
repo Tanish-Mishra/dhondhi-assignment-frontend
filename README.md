@@ -1,4 +1,4 @@
-# Project Title
+# Dhondhi Assignment Frontend
 
 A simple blogging platform where users can create, read, update, and delete blog posts.
 
